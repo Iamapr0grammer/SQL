@@ -1,0 +1,18 @@
+import sqlite3
+
+# Read SQL query from file
+with open("bank/QueryCommand.sql", "r") as file:
+    sql_query = file.read()
+
+# Connect to SQLite database
+conn = sqlite3.connect("bank/bank_database.db")
+
+# Execute SQL query
+df = pd.read_sql_query(sql_query, conn)
+
+# Print or save output
+print(df.head())  # Display results in terminal
+df.to_csv("output.csv", index=False)  # Save results to a CSV file
+
+conn.close()
+print("SQL Query executed and saved!")
